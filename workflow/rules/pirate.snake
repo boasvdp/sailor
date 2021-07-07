@@ -1,0 +1,19 @@
+rule pirate:
+  input:
+    expand("prokka_out/{sample}/{sample}.gff", sample=IDS)
+  output:
+    directory("pirate_out")
+  conda:
+    "../envs/pirate.yaml"
+  params:
+    general = config["pirate"]["general"]
+  log:
+    "logs/pirate.log"
+  threads: 16
+  shell:
+    """
+    mkdir -p tmp_gffs
+    cp {input} tmp_gffs/
+    PIRATE -i tmp_gffs -o {output} {params.general} --threads {threads} -z 2
+    rm -rf tmp_gffs
+    """

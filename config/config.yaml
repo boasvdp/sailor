@@ -1,0 +1,12 @@
+prokka:
+ general: ""
+ kingdom: "Bacteria"
+ genus: "Escherichia"
+ species: "coli"
+
+pirate:
+ general: "--para-off"
+
+iqtree:
+ prefix: "test"
+ bootstraps: "1000"
