@@ -1,0 +1,13 @@
+rule check_aln:
+  input:
+    expand("aligned_core_filtered/{sample}.aln", sample=COREGENES)
+  output:
+    "AMAS_summary_out/summary.tsv"
+  conda:
+    "../envs/check_aln.yaml"
+  log:
+    "logs/check_aln.log"
+  shell:
+    """
+    AMAS.py summary --in-files {input} -c {threads} -d dna -f fasta --summary-out {output}
+    """

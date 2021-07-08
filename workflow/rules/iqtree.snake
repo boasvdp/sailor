@@ -1,21 +1,23 @@
 rule iqtree:
   input:
-    "pirate_out"
+#    expand("aligned_core_filtered/{sample}.aln", sample=COREGENES),
+    aln = "AMAS_concat_out/core_gene_alignment.aln",
+    partition = "AMAS_concat_out/partitions_formatted.txt"
   output:
     directory("iqtree_out")
   conda:
     "../envs/iqtree.yaml"
   params:
     prefix = config["iqtree"]["prefix"],
-    bootstraps = config["iqtree"]["bootstraps"]
+    bootstraps = config["iqtree"]["bootstraps"],
+    model = config["iqtree"]["model"]
   log:
     "logs/iqtree.log"
   threads: 16
   shell:
     """
     mkdir -p {output} && cd {output}
-    snp-sites ../{input}/core_alignment.aln > core_gene_alignment_snp-sites.aln
-    iqtree -fconst $(snp-sites -C ../{input}/core_alignment.aln) -B {params.bootstraps} -nt AUTO -m 'GTR+F+R3' -pre {params.prefix} -s core_gene_alignment_snp-sites.aln 2>&1>../{log}
+    iqtree -bb {params.bootstraps} -nt AUTO -m {params.model} -pre {params.prefix} -s ../{input.aln} -p ../{input.partition} 2>&1>../{log}
     if [ -f {params.prefix}.treefile ]; then echo "{output}/{params.prefix}.treefile exists"; else exit 1; fi
     """
 

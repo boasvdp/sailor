@@ -1,0 +1,16 @@
+rule concat_aln:
+  input:
+    "aligned_core_to_concatenate"
+  output:
+    aln = "AMAS_concat_out/core_gene_alignment.aln",
+    partition = "AMAS_concat_out/partitions.txt"
+  conda:
+    "../envs/check_aln.yaml"
+  log:
+    "logs/concat_aln.log"
+  threads: 16
+  shell:
+    """
+    cd $(dirname {output.aln})
+    AMAS.py concat --in-files ../{input}/*.aln -t ../{output.aln} -c {threads} -f fasta -d dna 2>&1>../{log}
+    """

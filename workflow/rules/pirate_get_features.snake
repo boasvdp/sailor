@@ -1,0 +1,19 @@
+rule pirate_get_features:
+  input:
+    pirate_dir = "pirate_out",
+    core_gene_families = "core_gene_families/PIRATE.core_gene_families.tsv"
+  output:
+    directory("pirate_features_out")
+  conda:
+    "../envs/pirate.yaml"
+  params:
+    threshold = config['pirate_get_features']['threshold'],
+    dosage = config['pirate_get_features']['dosage']
+  log:
+    "logs/pirate_get_features.log"
+  threads: 16
+  shell:
+    """
+    PIRATE_PATH=$(command -v PIRATE)
+    ${{PIRATE_PATH%bin/PIRATE}}/scripts/align_feature_sequences.pl --input {input.core_gene_families} --gff {input.pirate_dir}/modified_gffs --processes {threads} --output {output} --threshold {params.threshold} --dosage {params.dosage} 2>&1>{log}
+    """

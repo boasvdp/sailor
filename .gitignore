@@ -1,3 +1,12 @@
-.snakemake
+aligned_*
+AMAS_*
+core_gene_families
 genomes
-
+gubbins_out
+iqtree_out
+logs
+maskrc-svg.py
+pirate_features_out
+pirate_out
+prokka_out
+.snakemake

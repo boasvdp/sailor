@@ -1,0 +1,19 @@
+rule detect_recombination:
+  input:
+    "aligned_core/{sample}.aln"
+  output:
+    gubbins = directory("gubbins_out/{sample}")
+  conda:
+    "../envs/detect_recombination.yaml"
+  params:
+    iterations = config["detect_recombination"]["iterations"],
+    min_window_size = config["detect_recombination"]["min_window_size"],
+    prefix = "{sample}"
+  log:
+    "logs/detect_recombination/{sample}.log"
+  threads: 16
+  shell:
+    """
+    mkdir -p {output} && cd {output}
+    run_gubbins.py --iterations {params.iterations} --min-window-size {params.min_window_size} --threads {threads} --prefix {params.prefix} ../../{input} 2>&1>../../{log}
+    """

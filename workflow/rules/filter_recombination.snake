@@ -1,0 +1,21 @@
+rule filter_recombination:
+  input:
+    gubbins = "gubbins_out/{sample}",
+    aln = "aligned_core/{sample}.aln"
+  output:
+    "aligned_core_filtered/{sample}.aln"
+  conda:
+    "../envs/filter_recombination.yaml"
+  params:
+    prefix = "{sample}"
+  log:
+    "logs/filter_recombination/{sample}.log"
+  threads: 16
+  shell:
+    """
+    bash workflow/scripts/download_maskrc.sh
+    OUTPUTDIR=$(dirname {output})
+    mkdir -p $OUTPUTDIR
+    cd {input.gubbins}
+    python ../../maskrc-svg.py --gubbins --aln ../../{input.aln} --out ../../{output} {params.prefix} 2>&1>../../{log}
+    """

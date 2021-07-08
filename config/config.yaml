@@ -5,8 +5,24 @@ prokka:
  species: "coli"
 
 pirate:
- general: "--para-off"
+ general: "--align --para-off"
+
+define_core:
+ threshold: 0.95
+ dosage: 1
+
+pirate_get_features:
+ threshold: 90
+ dosage: 1
+
+detect_recombination:
+ iterations: 20
+ min_window_size: 50
+
+select_aln:
+ threshold: 50
 
 iqtree:
  prefix: "test"
  bootstraps: "1000"
+ model: 'GTR+F+R3'

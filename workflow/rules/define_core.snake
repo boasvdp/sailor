@@ -1,0 +1,17 @@
+rule define_core:
+  input:
+    "pirate_out"
+  output:
+    "core_gene_families/PIRATE.core_gene_families.tsv"
+  conda:
+    "../envs/python.yaml"
+  params:
+    threshold = config["define_core"]["threshold"],
+    dosage = config["define_core"]["dosage"]
+  log:
+    "logs/define_core.log"
+  threads: 16
+  shell:
+    """
+    python workflow/scripts/define_core.py --input {input}/PIRATE.gene_families.tsv --threshold {params.threshold} --output {output} 2>&1>{log}
+    """

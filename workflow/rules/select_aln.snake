@@ -1,0 +1,17 @@
+rule select_aln:
+  input: 
+    aln = expand("aligned_core_filtered/{sample}.aln", sample=COREGENES),
+    amas = "AMAS_summary_out/summary.tsv",
+  output:
+    directory("aligned_core_to_concatenate")
+  conda:
+    "../envs/python.yaml"
+  params:
+    threshold = config["select_aln"]["threshold"]
+  log:
+    "logs/select_aln.log"
+  threads: 16
+  shell:
+    """
+    python workflow/scripts/select_aln.py --input {input.aln} --amas {input.amas} --threshold 50 --outdir {output}
+    """
