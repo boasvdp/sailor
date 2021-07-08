@@ -9,6 +9,7 @@ rule concat_aln:
   log:
     "logs/concat_aln.log"
   threads: 16
+  group: "prepare_aln"
   shell:
     """
     cd $(dirname {output.aln})

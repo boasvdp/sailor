@@ -7,6 +7,7 @@ rule check_aln:
     "../envs/check_aln.yaml"
   log:
     "logs/check_aln.log"
+  group: "prepare_aln"
   shell:
     """
     AMAS.py summary --in-files {input} -c {threads} -d dna -f fasta --summary-out {output}

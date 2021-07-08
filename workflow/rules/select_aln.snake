@@ -11,6 +11,7 @@ rule select_aln:
   log:
     "logs/select_aln.log"
   threads: 16
+  group: "prepare_aln"
   shell:
     """
     python workflow/scripts/select_aln.py --input {input.aln} --amas {input.amas} --threshold 50 --outdir {output}

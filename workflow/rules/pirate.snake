@@ -10,6 +10,7 @@ rule pirate:
   log:
     "logs/pirate.log"
   threads: 16
+  group: "core_genome"
   shell:
     """
     mkdir -p tmp_gffs

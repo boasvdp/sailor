@@ -11,6 +11,7 @@ rule filter_recombination:
   log:
     "logs/filter_recombination/{sample}.log"
   threads: 16
+  group: "process_gene"
   shell:
     """
     bash workflow/scripts/download_maskrc.sh

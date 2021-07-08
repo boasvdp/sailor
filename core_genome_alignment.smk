@@ -4,7 +4,6 @@ COREGENES, = glob_wildcards("pirate_features_out/{sample}.fasta")
 
 rule all:
   input:
-#    "AMAS_concat_out/core_gene_alignment.aln",
     "iqtree_out"
 
 include: "workflow/rules/align_core.snake"

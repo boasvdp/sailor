@@ -12,6 +12,7 @@ rule detect_recombination:
   log:
     "logs/detect_recombination/{sample}.log"
   threads: 16
+  group: "process_gene"
   shell:
     """
     mkdir -p {output} && cd {output}

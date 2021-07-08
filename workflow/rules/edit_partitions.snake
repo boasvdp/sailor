@@ -5,6 +5,7 @@ rule edit_partition:
     "AMAS_concat_out/partitions_formatted.txt"
   log:
     "logs/edit_partition.log"
+  group: "prepare_aln"
   shell:
     """
     python workflow/scripts/edit_partitions.py --input {input} > {output} 2>{log}

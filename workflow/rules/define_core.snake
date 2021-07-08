@@ -11,6 +11,7 @@ rule define_core:
   log:
     "logs/define_core.log"
   threads: 16
+  group: "core_genome"
   shell:
     """
     python workflow/scripts/define_core.py --input {input}/PIRATE.gene_families.tsv --threshold {params.threshold} --output {output} 2>&1>{log}

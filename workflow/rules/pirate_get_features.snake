@@ -12,6 +12,7 @@ rule pirate_get_features:
   log:
     "logs/pirate_get_features.log"
   threads: 16
+  group: "core_genome"
   shell:
     """
     PIRATE_PATH=$(command -v PIRATE)
