@@ -9,4 +9,5 @@ maskrc-svg.py
 pirate_features_out
 pirate_out
 prokka_out
+slurm*
 .snakemake

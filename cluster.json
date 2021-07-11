@@ -1,0 +1,60 @@
+{
+  "__default__" :
+  {
+    "account" : "vdputten",
+    "time" : "01:00:00",
+    "n" : 1,
+    "name" : "JOBNAME.{rule}.{wildcards}",
+    "output" : "logs/cluster/{rule}.{wildcards}.out",
+    "error" : "logs/cluster/{rule}.{wildcards}.err"
+  },
+  "align_core" :
+  {
+    "time" : "4:00:00"
+  },
+  "check_aln" :
+  {
+    "time" : "00:30:00"
+  },
+  "concat_aln" :
+  {
+    "time" : "00:30:00"
+  },
+  "define_core" :
+  {
+    "time" : "00:30:00"
+  },
+  "detect_recombination" :
+  {
+    "time" : "6:00:00"
+  },
+  "edit_partition" :
+  {
+    "time" : "00:30:00"
+  },
+  "filter_recombination" :
+  {
+    "time" : "00:30:00"
+  },
+  "iqtree" :
+  {
+    "time" : "4-23:59:59"
+  },
+  "pirate_get_features" :
+  {
+    "time" : "02:00:00"
+  },
+  "pirate" :
+  {
+    "time" : "4-23:59:59"
+  },
+  "prokka" :
+  {
+    "time" : "00:30:00"
+  },
+  "select_aln" :
+  {
+    "time" : "02:00:00"
+  },
+
+}
